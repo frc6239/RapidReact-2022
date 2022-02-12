@@ -31,6 +31,9 @@ public class Robot extends TimedRobot {
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
 
+    m_frontL.configFactoryDefault();
+    m_backL.configFactoryDefault();
+
     m_frontL.set(ControlMode.PercentOutput, 0);
     m_backL.set(ControlMode.PercentOutput, 0);
     m_frontR.set(ControlMode.PercentOutput, 0);
