@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
+
 public class Robot extends TimedRobot {
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -23,13 +24,21 @@ public class Robot extends TimedRobot {
 
   WPI_TalonFX mytalon = new WPI_TalonFX(5, "rio");
   Joystick stickLeft = new Joystick(0);
-  boolean buttonPressed = false;
+  boolean button1Pressed = false;
+  boolean button2Pressed = false;
+  boolean button3Pressed = false;
+  boolean button4Pressed = false;
+  double speed;
+  double direction;
 
   @Override
   public void robotInit() {
-  mytalon.configFactoryDefault();
+  
+    speed = 0.1;
+    direction = 1.0;
+    mytalon.configFactoryDefault();
 
-  mytalon.set(ControlMode.PercentOutput, 0);
+    mytalon.set(ControlMode.PercentOutput, 0);
 }
 
   @Override
@@ -37,26 +46,55 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousInit() {}
+  public void autonomousInit() {
+
+  }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+
+  }
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+
+  }
 
   @Override
   public void teleopPeriodic() {
 
-    buttonPressed = stickLeft.getRawButtonPressed(1);
-
+  button1Pressed = stickLeft.getRawButtonPressed(1);
+  button2Pressed = stickLeft.getRawButtonPressed(2);
+  button3Pressed = stickLeft.getRawButtonPressed(3);
+  button4Pressed = stickLeft.getRawButtonPressed(4);
   double stick = stickLeft.getY();
 
-if (buttonPressed = true) {
-  mytalon.set(ControlMode.PercentOutput, 0.5*stick);
-} else {
-  mytalon.set(ControlMode.PercentOutput, 0.25*stick);
-}
+  if (button1Pressed == true) {
+    speed += 0.1;
+    System.out.println("Button 1 pressed.");
+  }
+  if (button2Pressed == true) {
+  speed -= 0.1;
+    System.out.println("Button 2 pressed.");
+  } 
+  
+  if (button3Pressed == true) {
+    direction *= -1.0;
+    System.out.println("Button 3 pressed.");
+  } 
+
+  if (button4Pressed == true) {
+    speed = 0.0;
+    System.out.println("Button 4 pressed.");
+  }
+  
+  if (speed < 0.0) {
+    speed = 0.0;
+  }
+  if (speed > 1.0) {
+  speed = 1.0;
+  }
+  mytalon.set(ControlMode.PercentOutput, direction*speed*stick);
 
   }
 
