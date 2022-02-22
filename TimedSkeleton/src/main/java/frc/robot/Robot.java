@@ -30,12 +30,15 @@ public class Robot extends TimedRobot {
   boolean button4Pressed = false;
   double speed;
   double direction;
+  boolean stopped = false;
+  double lastSpeed;
 
   @Override
   public void robotInit() {
   
     speed = 0.1;
     direction = 1.0;
+    lastSpeed = 0.0;
     mytalon.configFactoryDefault();
 
     mytalon.set(ControlMode.PercentOutput, 0);
@@ -84,7 +87,16 @@ public class Robot extends TimedRobot {
   } 
 
   if (button4Pressed == true) {
+  if (stopped == false) {
+    lastSpeed = speed;
     speed = 0.0;
+    stopped = true;
+  }
+  else {
+    speed = lastSpeed;
+    lastSpeed = 0.0;
+    stopped = false;
+  }
     System.out.println("Button 4 pressed.");
   }
   
