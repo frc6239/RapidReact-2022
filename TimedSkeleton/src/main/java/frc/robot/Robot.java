@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.phoenix.motorcontrol.can.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,11 +34,12 @@ public class Robot extends TimedRobot {
   double direction;
   boolean stopped = false;
   double lastSpeed;
+  Faults _faults = new Faults();
 
   @Override
   public void robotInit() {
   
-    speed = 0.1;
+    speed = 0.2;
     direction = 1.0;
     lastSpeed = 0.0;
     mytalon.configFactoryDefault();
@@ -88,10 +91,11 @@ public class Robot extends TimedRobot {
 
   if (button4Pressed == true) {
   if (stopped == false) {
-    lastSpeed = speed;
+    speed = lastSpeed;
     speed = 0.0;
     stopped = true;
   }
+
   else {
     speed = lastSpeed;
     lastSpeed = 0.0;
@@ -107,6 +111,13 @@ public class Robot extends TimedRobot {
   speed = 1.0;
   }
   mytalon.set(ControlMode.PercentOutput, direction*speed*stick);
+  
+  if (stickLeft.getRawButton(5)) {
+    System.out.println("Sensor Vel:" + mytalon.getSelectedSensorVelocity());
+    System.out.println("Sensor Pos:" + mytalon.getSelectedSensorPosition());
+    System.out.println("Out %" + mytalon.getMotorOutputPercent());
+    System.out.println("Out Of Phase:" + _faults.SensorOutOfPhase);
+  }
 
   }
 
