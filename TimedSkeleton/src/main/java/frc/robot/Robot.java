@@ -9,7 +9,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -91,7 +90,7 @@ public class Robot extends TimedRobot {
 
   if (button4Pressed == true) {
   if (stopped == false) {
-    speed = lastSpeed;
+    lastSpeed = speed;
     speed = 0.0;
     stopped = true;
   }
