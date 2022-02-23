@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
 
 		/* scaling depending on what user wants */
 		double pos_Rotations = (double) selSenPos / kUnitsPerRevolution;
-		double vel_RotPerSec = (double) selSenVel / kUnitsPerRevolution * 10; /* scale per100ms to perSecond */
+		double vel_RotPerSec = (double) selSenVel / kUnitsPerRevolution * 10.0; /* scale per100ms to perSecond */
 		double vel_RotPerMin = vel_RotPerSec * 60.0;
 
 		/*
@@ -93,12 +93,43 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-
+    mytalon.setSelectedSensorPosition(0);
+    mytalon.set(ControlMode.PercentOutput, 0.1);
   }
 
   @Override
   public void autonomousPeriodic() {
+    double appliedMotorOutput = mytalon.getMotorOutputPercent();
+		double selSenPos = mytalon.getSelectedSensorPosition(0); /* position units */
+		double selSenVel = mytalon.getSelectedSensorVelocity(0); /* position units per 100ms */
 
+		/* scaling depending on what user wants */
+		double pos_Rotations = (double) selSenPos / kUnitsPerRevolution;
+		double vel_RotPerSec = (double) selSenVel / kUnitsPerRevolution * 10; /* scale per100ms to perSecond */
+		double vel_RotPerMin = vel_RotPerSec * 60.0;
+
+		/*
+		 * Print to console. This is also a good oppurtunity to self-test/plot in Tuner
+		 * to see how the values match.
+		 * 
+		 * Note these prints can cause "Loop time of 0.02s overrun" errors in the console.
+		 * This is because prints are slow.
+		 */
+		if (selSenPos >= 10000) {
+			System.out.printf("Motor-out: %.2f | ", appliedMotorOutput);
+			System.out.printf("Pos-units: %.2f | ", selSenPos);
+			System.out.printf("Vel-unitsPer100ms: %.2f | ", selSenVel);
+			System.out.printf("Pos-Rotations:%.3f | ", pos_Rotations);
+			System.out.printf("Vel-RPS:%.1f | ", vel_RotPerSec);
+			System.out.printf("Vel-RPM:%.1f | ", vel_RotPerMin);
+			System.out.println();
+      System.out.println("Motor stopped.");
+      mytalon.set(ControlMode.PercentOutput, 0.0);
+      mytalon.setSelectedSensorPosition(0);
+		}
+
+		/* set position to zero on button 1 */
+	
   }
 
   @Override
