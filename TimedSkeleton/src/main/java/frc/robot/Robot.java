@@ -25,10 +25,6 @@ public class Robot extends TimedRobot {
 
   WPI_TalonFX mytalon = new WPI_TalonFX(5, "rio");
   Joystick stickLeft = new Joystick(0);
-  boolean button1Pressed = false;
-  boolean button2Pressed = false;
-  boolean button3Pressed = false;
-  boolean button4Pressed = false;
   double speed;
   double direction;
   boolean stopped = false;
@@ -68,27 +64,23 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-  button1Pressed = stickLeft.getRawButtonPressed(1);
-  button2Pressed = stickLeft.getRawButtonPressed(2);
-  button3Pressed = stickLeft.getRawButtonPressed(3);
-  button4Pressed = stickLeft.getRawButtonPressed(4);
   double stick = stickLeft.getY();
 
-  if (button1Pressed == true) {
+  if (stickLeft.getRawButtonPressed(1)) {
     speed += 0.1;
     System.out.println("Button 1 pressed.");
   }
-  if (button2Pressed == true) {
+  if (stickLeft.getRawButtonPressed(2)) {
   speed -= 0.1;
     System.out.println("Button 2 pressed.");
   } 
   
-  if (button3Pressed == true) {
+  if (stickLeft.getRawButtonPressed(3)) {
     direction *= -1.0;
     System.out.println("Button 3 pressed.");
   } 
 
-  if (button4Pressed == true) {
+  if (stickLeft.getRawButtonPressed(4)) {
   if (stopped == false) {
     lastSpeed = speed;
     speed = 0.0;
@@ -111,7 +103,7 @@ public class Robot extends TimedRobot {
   }
   mytalon.set(ControlMode.PercentOutput, direction*speed*stick);
   
-  if (stickLeft.getRawButton(5)) {
+  if (stickLeft.getRawButtonPressed(5)) {
     System.out.println("Sensor Vel:" + mytalon.getSelectedSensorVelocity());
     System.out.println("Sensor Pos:" + mytalon.getSelectedSensorPosition());
     System.out.println("Out %" + mytalon.getMotorOutputPercent());
