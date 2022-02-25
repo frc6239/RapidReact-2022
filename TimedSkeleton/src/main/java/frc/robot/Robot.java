@@ -27,9 +27,8 @@ public class Robot extends TimedRobot {
   final int kUnitsPerRevolution = 2048;
   final TalonFXInvertType kInvertType = TalonFXInvertType.Clockwise;
   final NeutralMode kBrakeDurNeutral = NeutralMode.Coast;
-  int _loops = 0;
-
-  WPI_TalonFX mytalon = new WPI_TalonFX(5, "rio");
+  // Motor 6 is the intake. 
+  WPI_TalonFX mytalon = new WPI_TalonFX(6, "rio");
   Joystick stickLeft = new Joystick(0);
   double speed;
   double direction;
@@ -40,7 +39,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
   
-    speed = 0.2;
+    speed = 0.10;
     direction = 1.0;
     lastSpeed = 0.0;
     TalonFXConfiguration configs = new TalonFXConfiguration();
@@ -55,14 +54,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    double appliedMotorOutput = mytalon.getMotorOutputPercent();
-		double selSenPos = mytalon.getSelectedSensorPosition(0); /* position units */
-		double selSenVel = mytalon.getSelectedSensorVelocity(0); /* position units per 100ms */
-
-		/* scaling depending on what user wants */
-		double pos_Rotations = (double) selSenPos / kUnitsPerRevolution;
-		double vel_RotPerSec = (double) selSenVel / kUnitsPerRevolution * 10.0; /* scale per100ms to perSecond */
-		double vel_RotPerMin = vel_RotPerSec * 60.0;
 
 		/*
 		 * Print to console. This is also a good oppurtunity to self-test/plot in Tuner
@@ -71,64 +62,16 @@ public class Robot extends TimedRobot {
 		 * Note these prints can cause "Loop time of 0.02s overrun" errors in the console.
 		 * This is because prints are slow.
 		 */
-		if ((++_loops >= 10) && (stopped == false)) {
-			_loops = 0;
-			System.out.printf("Motor-out: %.2f | ", appliedMotorOutput);
-			System.out.printf("Pos-units: %.2f | ", selSenPos);
-			System.out.printf("Vel-unitsPer100ms: %.2f | ", selSenVel);
-			System.out.printf("Pos-Rotations:%.3f | ", pos_Rotations);
-			System.out.printf("Vel-RPS:%.1f | ", vel_RotPerSec);
-			System.out.printf("Vel-RPM:%.1f | ", vel_RotPerMin);
-			System.out.println();
-		}
 
 		/* set position to zero on button 1 */
-		if (stickLeft.getRawButtonPressed(6)) {
-			mytalon.setSelectedSensorPosition(0);
-      System.out.println();
-      System.out.println();
-      System.out.println();
-		}
 	}
 
   @Override
   public void autonomousInit() {
-    mytalon.setSelectedSensorPosition(0);
-    mytalon.set(ControlMode.PercentOutput, 0.1);
   }
 
   @Override
   public void autonomousPeriodic() {
-    double appliedMotorOutput = mytalon.getMotorOutputPercent();
-		double selSenPos = mytalon.getSelectedSensorPosition(0); /* position units */
-		double selSenVel = mytalon.getSelectedSensorVelocity(0); /* position units per 100ms */
-
-		/* scaling depending on what user wants */
-		double pos_Rotations = (double) selSenPos / kUnitsPerRevolution;
-		double vel_RotPerSec = (double) selSenVel / kUnitsPerRevolution * 10; /* scale per100ms to perSecond */
-		double vel_RotPerMin = vel_RotPerSec * 60.0;
-
-		/*
-		 * Print to console. This is also a good oppurtunity to self-test/plot in Tuner
-		 * to see how the values match.
-		 * 
-		 * Note these prints can cause "Loop time of 0.02s overrun" errors in the console.
-		 * This is because prints are slow.
-		 */
-		if (selSenPos >= 10000) {
-			System.out.printf("Motor-out: %.2f | ", appliedMotorOutput);
-			System.out.printf("Pos-units: %.2f | ", selSenPos);
-			System.out.printf("Vel-unitsPer100ms: %.2f | ", selSenVel);
-			System.out.printf("Pos-Rotations:%.3f | ", pos_Rotations);
-			System.out.printf("Vel-RPS:%.1f | ", vel_RotPerSec);
-			System.out.printf("Vel-RPM:%.1f | ", vel_RotPerMin);
-			System.out.println();
-      System.out.println("Motor stopped.");
-      mytalon.set(ControlMode.PercentOutput, 0.0);
-      mytalon.setSelectedSensorPosition(0);
-		}
-
-		/* set position to zero on button 1 */
 	
   }
 
@@ -145,38 +88,47 @@ public class Robot extends TimedRobot {
   if (stickLeft.getRawButtonPressed(1)) {
     speed += 0.1;
     System.out.println("Button 1 pressed.");
+    System.out.println("Speed = " + speed);
   }
+
   if (stickLeft.getRawButtonPressed(2)) {
   speed -= 0.1;
     System.out.println("Button 2 pressed.");
+    System.out.println("Speed = " + speed);
   } 
   
   if (stickLeft.getRawButtonPressed(3)) {
     direction *= -1.0;
     System.out.println("Button 3 pressed.");
+    System.out.println("Changed direction.");
   } 
 
   if (stickLeft.getRawButtonPressed(4)) {
-  if (stopped == false) {
-    lastSpeed = speed;
-    speed = 0.0;
-    stopped = true;
-  }
-
-  else {
-    speed = lastSpeed;
-    lastSpeed = 0.0;
-    stopped = false;
-  }
     System.out.println("Button 4 pressed.");
+
+    if (stopped == false) {
+      lastSpeed = speed;
+      speed = 0.0;
+      stopped = true;
+      System.out.println("Motor stopped.");
+    }
+
+    else {
+      speed = lastSpeed;
+      lastSpeed = 0.0;
+      stopped = false;
+      System.out.println("Motor started.");
+    }
   }
   
   if (speed < 0.0) {
     speed = 0.0;
   }
+
   if (speed > 1.0) {
   speed = 1.0;
   }
+  
   mytalon.set(ControlMode.PercentOutput, direction*speed*stick);
   
   if (stickLeft.getRawButtonPressed(5)) {
@@ -184,6 +136,11 @@ public class Robot extends TimedRobot {
     System.out.println("Sensor Pos:" + mytalon.getSelectedSensorPosition());
     System.out.println("Out %" + mytalon.getMotorOutputPercent());
     System.out.println("Out Of Phase:" + _faults.SensorOutOfPhase);
+  }
+  
+  if (stickLeft.getRawButtonPressed(6)) {
+    mytalon.setSelectedSensorPosition(0);
+    System.out.println("Sensor value reset.");
   }
 
   }
