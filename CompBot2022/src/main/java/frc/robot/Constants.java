@@ -34,9 +34,6 @@ public class Constants {
         public static final int kLeftBackMotorPort = 2;
         public static final int kRightFrontMotorPort = 3;
         public static final int kRightBackMotorPort = 4;
-        public static final int kDumperMotorPort = 5;
-        public static final int kIntakeLiftMotorPort = 6;
-        public static final int kIntakeWheelMotorPort = 7;
     }
 
     // Constants.DriveConstants.kLeftFrontMotorPort
@@ -49,6 +46,9 @@ public class Constants {
     public static final class IntakeConstants {
         public static final int kIntakeLowerMotorPort = 5;
         public static final int kIntakeWheelMotorPort = 7;
+        public static final double lowerIntakeSpeed = 0.25;
+        public static final double intakeWheelSpeed = 0.25;
+        public static final double intakePositionLimit = 20.0;
     }
 
     // Joystick buttons for commands
