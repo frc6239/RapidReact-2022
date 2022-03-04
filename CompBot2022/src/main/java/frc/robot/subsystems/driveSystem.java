@@ -84,7 +84,7 @@ private DifferentialDrive differentialDrive1;
         addChild("mc_rightSide",mc_rightSide);
         
 
-        differentialDrive1 = new DifferentialDrive(mc_leftSide, m_frontL);
+        differentialDrive1 = new DifferentialDrive(mc_leftSide, mc_rightSide);
         addChild("Differential Drive 1",differentialDrive1);
         differentialDrive1.setSafetyEnabled(true);
         differentialDrive1.setExpiration(0.1);

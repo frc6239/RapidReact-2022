@@ -42,12 +42,12 @@ public class Constants {
     // Constants.DriveConstants.kLeftFrontMotorPort
     // Constants.DumperMotorPort
 
-    public static final class DumperConstants{
-        public static final int kDumperMotorPort = 5;
- }
+    public static final class DumperConstants {
+        public static final int kDumperMotorPort = 6;
+    }
 
     public static final class IntakeConstants {
-        public static final int kIntakeMotorPort = 6;
+        public static final int kIntakeLowerMotorPort = 5;
         public static final int kIntakeWheelMotorPort = 7;
     }
 
