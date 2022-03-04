@@ -118,7 +118,7 @@ public class intakeSystem extends SubsystemBase {
 
     public void lowerIntake () {
         if (intakeLowered == false) {
-        m_lowerIntakeMotor.set(Constants.IntakeConstants.lowerIntakeSpeed);
+          m_lowerIntakeMotor.set(Constants.IntakeConstants.lowerIntakeSpeed);
         }
     }
 

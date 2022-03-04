@@ -64,7 +64,7 @@ public class driveCommand extends CommandBase {
     @Override
     public void execute() {
         m_speedL = RobotContainer.getInstance().getJoystick0().getY();
-        m_speedL = RobotContainer.getInstance().getJoystick1().getY();
+        m_speedR = RobotContainer.getInstance().getJoystick1().getY();
         m_driveSystem.TankDrive(m_speedL, m_speedR);
     }
 
