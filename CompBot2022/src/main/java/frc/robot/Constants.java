@@ -48,7 +48,7 @@ public class Constants {
         public static final int kIntakeWheelMotorPort = 7;
         public static final double lowerIntakeSpeed = 0.25;
         public static final double intakeWheelSpeed = 0.25;
-        public static final double intakePositionLimit = 20.0;
+        public static final double intakePositionLimit = 500.0;
     }
 
     // Joystick buttons for commands
@@ -61,5 +61,6 @@ public class Constants {
     public static final class RightJoystickConstants {
         public static final int kMoveDumper = 1;
         public static final int kLowerIntake = 2;
+        public static final int kGetIntakeSensor = 5;
     }
 }

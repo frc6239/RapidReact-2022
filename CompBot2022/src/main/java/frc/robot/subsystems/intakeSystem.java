@@ -44,7 +44,7 @@ public class intakeSystem extends SubsystemBase {
     private double intakeMotorPos; 
     private WPI_TalonFX m_lowerIntakeMotor; 
     private CANSparkMax m_intakeWheelMotor;
-    private boolean inverted = false;
+    private boolean inverted = true;
     final int kUnitsPerRevolution = 2048;
     final TalonFXInvertType kInvertType = TalonFXInvertType.Clockwise;
     final NeutralMode kBrakeDurNeutral = NeutralMode.Coast;
@@ -119,11 +119,17 @@ public class intakeSystem extends SubsystemBase {
     public void lowerIntake () {
         if (intakeLowered == false) {
           m_lowerIntakeMotor.set(Constants.IntakeConstants.lowerIntakeSpeed);
+        
         }
     }
 
     public void resetSensor() {
         m_lowerIntakeMotor.setSelectedSensorPosition(0);
+        intakeLowered = false;
+    }
+
+    public double getSensor() {
+        return m_lowerIntakeMotor.getSelectedSensorPosition();
     }
  
     @Override 

@@ -72,8 +72,8 @@ private DifferentialDrive differentialDrive1;
         m_backL.follow(m_frontL);
         m_backR.follow(m_frontR);
 
-        m_frontR.setInverted(TalonFXInvertType.Clockwise);
-        m_frontL.setInverted(TalonFXInvertType.CounterClockwise);
+        m_frontR.setInverted(TalonFXInvertType.CounterClockwise);
+        m_frontL.setInverted(TalonFXInvertType.Clockwise);
 
         m_backR.setInverted(InvertType.FollowMaster);
         m_backL.setInverted(InvertType.FollowMaster);
