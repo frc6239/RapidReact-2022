@@ -134,6 +134,16 @@ public class dumperSystem extends SubsystemBase {
 
     }
 
+    public void stopRaising() {
+        m_dumperMotor.set(ControlMode.PercentOutput, 0);
+        dumperRaising = false;
+
+    }
+
+    public double getSensorValue() {
+        return m_dumperMotor.getSelectedSensorPosition();
+    }
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

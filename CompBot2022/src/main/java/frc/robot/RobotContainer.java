@@ -122,7 +122,7 @@ private final Joystick joystick0 = new Joystick(0);
     SmartDashboard.putData("Button Pickup Cargo",new pickupCargoCommand( m_intakeSystem ) );
 
     final JoystickButton b_moveDumper = new JoystickButton(joystick1, Constants.RightJoystickConstants.kMoveDumper);        
-    b_moveDumper.whenPressed(new raiseDumperCommand( m_dumperSystem ) ,true);
+    b_moveDumper.whenHeld(new raiseDumperCommand( m_dumperSystem ) ,true);
     b_moveDumper.whenReleased(new lowerDumperCommand( m_dumperSystem ) ,true);
     SmartDashboard.putData("Button Move Dumper",new lowerDumperCommand( m_dumperSystem ) );
 
