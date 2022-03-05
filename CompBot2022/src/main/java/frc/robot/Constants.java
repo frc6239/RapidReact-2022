@@ -65,5 +65,6 @@ public class Constants {
         public static final int kMoveDumper = 1;
         public static final int kLowerIntake = 2;
         public static final int kGetIntakeSensor = 5;
+        public static final int kGetDumperSensor = 6;
     }
 }

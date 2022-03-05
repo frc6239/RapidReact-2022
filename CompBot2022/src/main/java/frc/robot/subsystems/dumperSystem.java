@@ -140,7 +140,7 @@ public class dumperSystem extends SubsystemBase {
 
     }
 
-    public double getSensorValue() {
+    public double getSensor() {
         return m_dumperMotor.getSelectedSensorPosition();
     }
 
