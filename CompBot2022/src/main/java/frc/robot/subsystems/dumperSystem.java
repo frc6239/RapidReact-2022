@@ -115,6 +115,7 @@ public class dumperSystem extends SubsystemBase {
             if (dumperMotorPosition > Constants.DumperConstants.kDumperRaisedPositionLimit) {
              m_dumperMotor.set(ControlMode.PercentOutput, 0.0);
              dumperFullyRaised = true;
+             dumperRaising = false;
             } 
         }
          return dumperFullyRaised;
@@ -126,6 +127,7 @@ public class dumperSystem extends SubsystemBase {
             if (dumperMotorPosition < Constants.DumperConstants.kDumperLoweredPositionLimit) {
              m_dumperMotor.set(ControlMode.PercentOutput, 0.0);
              dumperFullyLowered = true;
+             dumperLowering = false;
             } 
         }
          return dumperFullyLowered;
