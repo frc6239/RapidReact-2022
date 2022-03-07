@@ -72,6 +72,7 @@ public class intakeSystem extends SubsystemBase {
         configs.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
         m_lowerIntakeMotor.configAllSettings(configs);
         m_lowerIntakeMotor.configFactoryDefault();
+        m_lowerIntakeMotor.configClearPositionOnLimitR(true, 20);
 
         m_lowerIntakeMotor.set(ControlMode.PercentOutput, 0.0);
         intakeMotorRunning = false;
