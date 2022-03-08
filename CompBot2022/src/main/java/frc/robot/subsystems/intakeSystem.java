@@ -73,6 +73,7 @@ public class intakeSystem extends SubsystemBase {
         m_lowerIntakeMotor.configAllSettings(configs);
         m_lowerIntakeMotor.configFactoryDefault();
         m_lowerIntakeMotor.configClearPositionOnLimitR(true, 20);
+        m_lowerIntakeMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 20);
 
         m_lowerIntakeMotor.set(ControlMode.PercentOutput, 0.0);
         intakeMotorRunning = false;
@@ -90,6 +91,11 @@ public class intakeSystem extends SubsystemBase {
     public void periodic() { 
         // This method will be called once per scheduler run 
     } 
+
+    // This is called at the end to reset state of the intake
+    public void resetIntakeState() {
+        intakeLowered = false;
+    }
 
     public void startMotor() {
         m_intakeWheelMotor.set(Constants.IntakeConstants.intakeWheelSpeed);
@@ -111,8 +117,8 @@ public class intakeSystem extends SubsystemBase {
     }
 
     public boolean isIntakeLowered() {
-        if (intakeLowered == false) {
-            intakeMotorPosition = m_lowerIntakeMotor.getSelectedSensorPosition();
+        intakeMotorPosition = (m_lowerIntakeMotor.getSelectedSensorPosition());
+        if ((intakeLowered == false) || (intakeMotorPosition == 0)) {
             if (intakeMotorPosition > Constants.IntakeConstants.intakePositionLimit) {
              m_lowerIntakeMotor.set(ControlMode.PercentOutput, 0.0);
              intakeLowered = true;
