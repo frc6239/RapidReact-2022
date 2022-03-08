@@ -95,6 +95,7 @@ public class intakeSystem extends SubsystemBase {
     // This is called at the end to reset state of the intake
     public void resetIntakeState() {
         intakeLowered = false;
+        intakeLowering = false;
     }
 
     public void startMotor() {
@@ -128,9 +129,13 @@ public class intakeSystem extends SubsystemBase {
     }
 
     public void lowerIntake () {
-        if (intakeLowering == false) {
-          m_lowerIntakeMotor.set(Constants.IntakeConstants.lowerIntakeSpeed);
-            intakeLowering = true;
+        // Check if intake was already lowered in atonoumous mode
+        if (intakeLowered == false) {
+            // Check if intake in process of lowering
+            if (intakeLowering == false) {
+            m_lowerIntakeMotor.set(Constants.IntakeConstants.lowerIntakeSpeed);
+                intakeLowering = true;
+            }
         }
     }
 
