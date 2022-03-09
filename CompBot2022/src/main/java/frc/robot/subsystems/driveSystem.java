@@ -107,5 +107,9 @@ private DifferentialDrive differentialDrive1;
         differentialDrive1.tankDrive(speedL, speedR);
     }
 
+    public double getSensor() {
+        return 0.0;
+    }
+
 }
 

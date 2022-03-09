@@ -34,6 +34,8 @@ public class Constants {
         public static final int kLeftBackMotorPort = 2;
         public static final int kRightFrontMotorPort = 3;
         public static final int kRightBackMotorPort = 4;
+        public static final double kTarmacDistance = 4096;
+        public static final double kDriveSpeed = 0.25;
     }
 
     // Constants.DriveConstants.kLeftFrontMotorPort
