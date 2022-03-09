@@ -99,6 +99,7 @@ public class dumperSystem extends SubsystemBase {
         if (dumperRaising == false) {
             m_dumperMotor.set(ControlMode.PercentOutput, Constants.DumperConstants.kDumperMotorSpeed);
             dumperRaising = true;
+            dumperFullyLowered = false;
         }
     }
 
@@ -106,13 +107,14 @@ public class dumperSystem extends SubsystemBase {
         if (dumperLowering == false) {
             m_dumperMotor.set(ControlMode.PercentOutput, -1.0*Constants.DumperConstants.kDumperMotorSpeed);
             dumperLowering = true;
+            dumperFullyRaised = false;
         }
     }
 
     public boolean isDumperRaised() {
         if (dumperFullyRaised == false) {
             dumperMotorPosition = m_dumperMotor.getSelectedSensorPosition();
-            if (dumperMotorPosition > Constants.DumperConstants.kDumperRaisedPositionLimit) {
+            if (dumperMotorPosition >= Constants.DumperConstants.kDumperRaisedPositionLimit) {
              m_dumperMotor.set(ControlMode.PercentOutput, 0.0);
              dumperFullyRaised = true;
              dumperRaising = false;
@@ -124,20 +126,18 @@ public class dumperSystem extends SubsystemBase {
     public boolean isDumperLowered() {
         if (dumperFullyLowered == false) {
             dumperMotorPosition = m_dumperMotor.getSelectedSensorPosition();
-            if (dumperMotorPosition < Constants.DumperConstants.kDumperLoweredPositionLimit) {
+            if (dumperMotorPosition <= Constants.DumperConstants.kDumperLoweredPositionLimit) {
              m_dumperMotor.set(ControlMode.PercentOutput, 0.0);
              dumperFullyLowered = true;
              dumperLowering = false;
             } 
         }
          return dumperFullyLowered;
-
     }
 
     public void stopRaising() {
         m_dumperMotor.set(ControlMode.PercentOutput, 0);
         dumperRaising = false;
-
     }
 
     public double getSensor() {
