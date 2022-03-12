@@ -97,7 +97,7 @@ public class dumperSystem extends SubsystemBase {
 
     public void raiseDumper() {
         if (dumperRaising == false) {
-            m_dumperMotor.set(ControlMode.PercentOutput, Constants.DumperConstants.kDumperMotorSpeed);
+            m_dumperMotor.set(ControlMode.PercentOutput, Constants.DumperConstants.kDumperRaiseMotorSpeed);
             dumperRaising = true;
             dumperFullyLowered = false;
         }
@@ -105,7 +105,7 @@ public class dumperSystem extends SubsystemBase {
 
     public void lowerDumper() {
         if (dumperLowering == false) {
-            m_dumperMotor.set(ControlMode.PercentOutput, -1.0*Constants.DumperConstants.kDumperMotorSpeed);
+            m_dumperMotor.set(ControlMode.PercentOutput, -1.0*Constants.DumperConstants.kDumperLowerMotorSpeed);
             dumperLowering = true;
             dumperFullyRaised = false;
         }
@@ -138,6 +138,11 @@ public class dumperSystem extends SubsystemBase {
     public void stopRaising() {
         m_dumperMotor.set(ControlMode.PercentOutput, 0);
         dumperRaising = false;
+    }
+
+    public void stopLowering() {
+        m_dumperMotor.set(ControlMode.PercentOutput, 0);
+        dumperLowering = false;
     }
 
     public double getSensor() {
