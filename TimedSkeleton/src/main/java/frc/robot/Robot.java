@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -26,12 +28,13 @@ public class Robot extends TimedRobot {
    */
   final int kUnitsPerRevolution = 2048;
   final TalonFXInvertType kInvertType = TalonFXInvertType.Clockwise;
-  final NeutralMode kBrakeDurNeutral = NeutralMode.Coast;
+  final NeutralMode kBrakeDurNeutral = NeutralMode.Brake;
   // Motor 6 is the intake. 
   WPI_TalonFX mytalon = new WPI_TalonFX(6, "rio");
   Joystick stickLeft = new Joystick(0);
   double speed;
   double direction;
+  double downMultiplier;
   boolean stopped = false;
   double lastSpeed;
   Faults _faults = new Faults();
@@ -42,6 +45,7 @@ public class Robot extends TimedRobot {
     speed = 0.10;
     direction = 1.0;
     lastSpeed = 0.0;
+    downMultiplier = speed/3;
     TalonFXConfiguration configs = new TalonFXConfiguration();
     configs.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
     mytalon.configAllSettings(configs);
@@ -66,6 +70,7 @@ public class Robot extends TimedRobot {
 		/* set position to zero on button 1 */
 	}
 
+  // hello you found a secret :)
   @Override
   public void autonomousInit() {
   }
@@ -121,6 +126,10 @@ public class Robot extends TimedRobot {
     }
   }
   
+  if (stickLeft.getRawButtonPressed(14)) {
+    System.out.println("Congrats, you found a secret :)");
+  }
+
   if (speed < 0.0) {
     speed = 0.0;
   }
@@ -128,14 +137,18 @@ public class Robot extends TimedRobot {
   if (speed > 1.0) {
   speed = 1.0;
   }
-  
-  mytalon.set(ControlMode.PercentOutput, direction*speed*stick);
+
+  // if (stick > 0.0) {
+    // mytalon.set(ControlMode.PercentOutput, downMultiplier*direction*speed*stick);
+  // } else {
+    mytalon.set(ControlMode.PercentOutput, direction*speed*stick);
+  // }
   
   if (stickLeft.getRawButtonPressed(5)) {
-    System.out.println("Sensor Vel:" + mytalon.getSelectedSensorVelocity());
-    System.out.println("Sensor Pos:" + mytalon.getSelectedSensorPosition());
-    System.out.println("Out %" + mytalon.getMotorOutputPercent());
-    System.out.println("Out Of Phase:" + _faults.SensorOutOfPhase);
+    System.out.println("Sensor Vel: " + mytalon.getSelectedSensorVelocity());
+    System.out.println("Sensor Pos: " + mytalon.getSelectedSensorPosition());
+    System.out.println("Out %: " + mytalon.getMotorOutputPercent());
+    System.out.println("Out Of Phase: " + _faults.SensorOutOfPhase);
   }
   
   if (stickLeft.getRawButtonPressed(6)) {
