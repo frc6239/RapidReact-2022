@@ -46,7 +46,7 @@ public class intakeSystem extends SubsystemBase {
     private boolean intakeMotorRunning;
     final int kUnitsPerRevolution = 2048;
     final TalonFXInvertType kInvertType = TalonFXInvertType.Clockwise;
-    final NeutralMode kBrakeDurNeutral = NeutralMode.Coast;
+    final NeutralMode kBrakeDurNeutral = NeutralMode.Brake;
     // Used to indicate when intake is lowered all the way
     private boolean intakeLowered = false;
     // Used to indicate when intake starts lowering

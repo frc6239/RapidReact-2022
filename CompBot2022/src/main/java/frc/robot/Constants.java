@@ -52,7 +52,7 @@ public class Constants {
     public static final class IntakeConstants {
         public static final int kIntakeLowerMotorPort = 5;
         public static final int kIntakeWheelMotorPort = 7;
-        public static final double lowerIntakeSpeed = 0.25;
+        public static final double lowerIntakeSpeed = 0.15;
         public static final double intakeWheelSpeed = 0.25;
         public static final double intakePositionLimit = 500.0;
     }
