@@ -50,33 +50,29 @@ public class AutonomousCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (isDriving == false) {
             // Get the initial value of the drive train sensor.
-            distanceDriven = m_driveSystem.getSensor();
             m_driveSystem.TankDrive(Constants.DriveConstants.kDriveSpeed, Constants.DriveConstants.kDriveSpeed);
             isDriving = true;
-        }
+        
     }
 
     // Called once the command ends or is interrupted.
     @Override
+    
     public void end(boolean interrupted) {
+        m_driveSystem.TankDrive(0, 0);
     }
+
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (isDriving == true) {
             m_driveSystem.getSensor();
             distanceDriven = m_driveSystem.getSensor() - startingPosition;
-            if (distanceDriven >= Constants.DriveConstants.kTarmacDistance) {
-                m_driveSystem.TankDrive(0.0, 0.0);
-                isDriving = false;
-            } else {
-                m_driveSystem.TankDrive(Constants.DriveConstants.kDriveSpeed, Constants.DriveConstants.kDriveSpeed);
-            }
-        }
-        return !isDriving;
+            return (distanceDriven >= Constants.DriveConstants.kTarmacDistance);
+           
+        
+        //return !isDriving;
     }
 
     @Override
