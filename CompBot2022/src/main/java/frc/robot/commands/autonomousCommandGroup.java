@@ -11,7 +11,7 @@ public class autonomousCommandGroup extends SequentialCommandGroup {
             //new lowerIntakeCommand(intake),
             //new raiseDumperCommand(dumper),
             //new lowerDumperCommand(dumper),
-            new driveDistanceCommand(drive)
+            new AutonomousCommand(drive)
         );
     }
 }
