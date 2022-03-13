@@ -8,10 +8,10 @@ import frc.robot.subsystems.intakeSystem;
 public class autonomousCommandGroup extends SequentialCommandGroup {
     public autonomousCommandGroup(driveSystem drive, dumperSystem dumper, intakeSystem intake) {
         addCommands(
-            new lowerIntakeCommand(intake)
+            //new lowerIntakeCommand(intake),
             //new raiseDumperCommand(dumper),
             //new lowerDumperCommand(dumper),
-            //new driveDistanceCommand(drive)
+            new driveDistanceCommand(drive)
         );
     }
 }
