@@ -43,10 +43,10 @@ public class Constants {
 
     public static final class DumperConstants {
         public static final int kDumperMotorPort = 6;
-        public static final double kDumperRaiseMotorSpeed = 0.75;
+        public static final double kDumperRaiseMotorSpeed = 0.6;
         public static final double kDumperLowerMotorSpeed = 0.1;
         public static final double kDumperRaisedPositionLimit = 43400;
-        public static final double kDumperLoweredPositionLimit = 0;
+        public static final double kDumperLoweredPositionLimit = 200;
     }
 
     public static final class IntakeConstants {
@@ -67,7 +67,9 @@ public class Constants {
     public static final class RightJoystickConstants {
         public static final int kMoveDumper = 1;
         public static final int kLowerIntake = 2;
+        public static final int kStartDriveTrain = 3;
         public static final int kGetIntakeSensor = 5;
         public static final int kGetDumperSensor = 6;
+        public static final int kResetDumperSensor = 7;
     }
 }

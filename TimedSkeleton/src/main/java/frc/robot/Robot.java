@@ -138,11 +138,11 @@ public class Robot extends TimedRobot {
   speed = 1.0;
   }
 
-  // if (stick > 0.0) {
-    // mytalon.set(ControlMode.PercentOutput, downMultiplier*direction*speed*stick);
-  // } else {
+  if (stick > 0.0) {
+    mytalon.set(ControlMode.PercentOutput, downMultiplier*direction*speed*stick);
+  } else {
     mytalon.set(ControlMode.PercentOutput, direction*speed*stick);
-  // }
+  }
   
   if (stickLeft.getRawButtonPressed(5)) {
     System.out.println("Sensor Vel: " + mytalon.getSelectedSensorVelocity());

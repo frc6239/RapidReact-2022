@@ -104,13 +104,34 @@ public class dumperSystem extends SubsystemBase {
     }
 
     public void moveDumper() {
+     
+        // Forward on joystick returns a negative number
+        // Backward on joystick returns a postive number
         rightStickY = RobotContainer.getInstance().getJoystick1().getY();
-        if (rightStickY > 0.0) {
+       
+        //dumperMotorPosition = m_dumperMotor.getSelectedSensorPosition();
+        //System.out.println("Dumper sensor value (raising): " + dumperMotorPosition);
+        // check if fully raised, if so return
+        //if ((dumperMotorPosition >= Constants.DumperConstants.kDumperRaisedPositionLimit) && (rightStickY < 0)){
+        // m_dumperMotor.set(ControlMode.PercentOutput, 0.0);
+        // return;
+        //} 
+        //check if fully lowered, if so return
+        //if ((dumperMotorPosition <= Constants.DumperConstants.kDumperLoweredPositionLimit) && (rightStickY > 0.0)){
+         //   m_dumperMotor.set(ControlMode.PercentOutput, 0.0);
+         //   return;
+         //  } 
+
+        if (rightStickY < 0.0) {
             rightStickY = rightStickY*Constants.DumperConstants.kDumperRaiseMotorSpeed;
         } else {
             rightStickY = rightStickY*Constants.DumperConstants.kDumperLowerMotorSpeed;
         }
         m_dumperMotor.set(ControlMode.PercentOutput, rightStickY);
+    }
+
+    public void stopDumper() {
+        m_dumperMotor.set(ControlMode.PercentOutput, 0);
     }
 
     public void raiseDumper() {
