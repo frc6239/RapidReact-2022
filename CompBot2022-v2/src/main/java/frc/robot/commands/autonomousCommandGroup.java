@@ -33,7 +33,7 @@ public class autonomousCommandGroup extends SequentialCommandGroup {
             new lowerIntake(m_intakeSystem),
             new raiseDumper(m_dumperSystem),
             new lowerDumper(m_dumperSystem),
-            new leaveTarmac(m_driveSystem)
+            new leaveTarmac(m_driveSystem, 30)
         );
 
     }
