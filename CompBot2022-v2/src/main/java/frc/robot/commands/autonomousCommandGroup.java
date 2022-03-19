@@ -11,6 +11,7 @@
 // ROBOTBUILDER TYPE: SequentialCommandGroup.
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.driveSystem;
 import frc.robot.subsystems.dumperSystem;
@@ -21,6 +22,7 @@ public class autonomousCommandGroup extends SequentialCommandGroup {
     public autonomousCommandGroup(intakeSystem m_intakeSystem, dumperSystem m_dumperSystem, driveSystem m_driveSystem){
 
         addCommands(
+            new InstantCommand(m_intakeSystem::resetIntakeState, m_intakeSystem),
             new lowerIntake(m_intakeSystem),
             new moveDumper(m_dumperSystem),
             new leaveTarmac(m_driveSystem, 30)

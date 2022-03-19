@@ -23,6 +23,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -32,9 +33,9 @@ public class driveSystem extends SubsystemBase {
     private WPI_TalonFX rightFrontMotor;
     private WPI_TalonFX rightBackMotor;
     private DifferentialDrive differentialDrive1;
-    private double joystickY;
-    private double joystickZ;
-    private Joystick joystick0;
+    private XboxController robotController;
+    private double leftStickY;
+    private double rightStickX;
 
     public driveSystem() {
         leftFrontMotor = new WPI_TalonFX(1, "rio");
@@ -75,14 +76,14 @@ public class driveSystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        joystick0 = RobotContainer.getInstance().getrobotController();
-        joystickY = joystick0.getY();
-        joystickZ = joystick0.getZ();
+        robotController = RobotContainer.getInstance().getrobotController();
+        leftStickY = robotController.getLeftY();
+        rightStickX = robotController.getRightX();
 
-        SmartDashboard.putNumber("Joystick Y Value", joystickY);
-        SmartDashboard.putNumber("Joystick Z Value", joystickZ);
+        SmartDashboard.putNumber("Left Joystick Y Value", leftStickY);
+        SmartDashboard.putNumber("Right Joystick X Value", rightStickX);
 
-        differentialDrive1.arcadeDrive(joystickY, -joystickZ);
+        differentialDrive1.arcadeDrive(leftStickY, -rightStickX);
     }
 
     @Override
@@ -93,8 +94,8 @@ public class driveSystem extends SubsystemBase {
         return leftFrontMotor.getSelectedSensorPosition();
     }
 
-    public void arcadeDrive(double x, double z) {
-        differentialDrive1.arcadeDrive(x, -z); 
+    public void arcadeDrive(double y, double x) {
+        differentialDrive1.arcadeDrive(y, -x); 
     }
 }
 
