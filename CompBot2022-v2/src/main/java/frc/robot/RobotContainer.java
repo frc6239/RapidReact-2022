@@ -119,6 +119,10 @@ public class RobotContainer {
         button7.whenHeld(new startIntake( m_intakeSystem ) ,true);
         SmartDashboard.putData("button7",new startIntake( m_intakeSystem ) );
 
+        final JoystickButton button6 = new JoystickButton(robotController, 6);        
+        button6.whenHeld(new lowerIntake( m_intakeSystem ) ,true);
+        SmartDashboard.putData("button6",new lowerIntake( m_intakeSystem ) );
+
         final JoystickButton button5 = new JoystickButton(robotController, 5);        
         button5.whenPressed(new reverseIntakeDirection( m_intakeSystem ) ,true);
         SmartDashboard.putData("button5",new reverseIntakeDirection( m_intakeSystem ) );
