@@ -67,6 +67,7 @@ public class lowerIntake extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         intakeLowerTime.stop();
+        m_intakeSystem.stopLoweringIntake();
         System.out.println("Timer stopped.");
     }
 
