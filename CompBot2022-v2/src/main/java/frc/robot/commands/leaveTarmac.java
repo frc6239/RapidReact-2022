@@ -30,12 +30,12 @@ public class leaveTarmac extends CommandBase {
     @Override
     public void initialize() {
         initalPosition = m_driveSystem.getSensor();
-        finalPosition = initalPosition+2048*m_distanceInches/(6*Math.PI);
+        finalPosition = initalPosition-2048*10.7*m_distanceInches/(6*Math.PI);
     }
 
     @Override
     public void execute() {
-        m_driveSystem.arcadeDrive(0.1, 0);
+        m_driveSystem.arcadeDrive(-0.5, 0);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class leaveTarmac extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return m_driveSystem.getSensor() > finalPosition;
+        return m_driveSystem.getSensor() < finalPosition;
     }
 
     @Override

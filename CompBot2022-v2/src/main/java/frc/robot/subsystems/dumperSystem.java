@@ -37,10 +37,11 @@ public class dumperSystem extends SubsystemBase {
         dumperMotor.configFactoryDefault();
         dumperMotor.set(ControlMode.PercentOutput, 0.0);
         dumperMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
-        dumperMotor.setInverted(TalonFXInvertType.CounterClockwise);
+        dumperMotor.setInverted(TalonFXInvertType.Clockwise);
         dumperMotor.setNeutralMode(NeutralMode.Brake);
         dumperMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 20);
         dumperMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 20);
+        dumperMotor.configOpenloopRamp(0.5);
     }
 
     public boolean isDumperRaised() {
@@ -52,7 +53,7 @@ public class dumperSystem extends SubsystemBase {
 }
 
     public void raiseDumper() {
-        dumperMotor.set(0.1);
+        dumperMotor.set(0.2);
     }
 
     public void lowerDumper() {
@@ -63,6 +64,9 @@ public class dumperSystem extends SubsystemBase {
         dumperMotor.set(0.0);
     }
 
+    public void lowerDumperAutonomous() {
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
@@ -71,11 +75,9 @@ public class dumperSystem extends SubsystemBase {
     @Override
     public void simulationPeriodic() {
         // This method will be called once per scheduler run when in simulation
-
     }
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-
 }
 

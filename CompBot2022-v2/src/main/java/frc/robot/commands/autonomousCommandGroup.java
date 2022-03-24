@@ -25,7 +25,7 @@ public class autonomousCommandGroup extends SequentialCommandGroup {
             new InstantCommand(m_intakeSystem::resetIntakeState, m_intakeSystem),
             new lowerIntake(m_intakeSystem),
             new moveDumper(m_dumperSystem),
-            new leaveTarmac(m_driveSystem, 30)
+            new leaveTarmac(m_driveSystem, 84)
         );
 
     }
