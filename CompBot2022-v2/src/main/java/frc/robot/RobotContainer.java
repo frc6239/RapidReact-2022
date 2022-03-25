@@ -104,16 +104,12 @@ public class RobotContainer {
         final JoystickButton button6 = new JoystickButton(robotController, 6);        
         button6.whenHeld(new raiseDumper( m_dumperSystem ) ,true);
         button6.whenReleased(new lowerDumper( m_dumperSystem ) ,true);
-        SmartDashboard.putData("button8",new raiseDumper( m_dumperSystem ) );
-        SmartDashboard.putData("button8",new lowerDumper( m_dumperSystem ) );
+        SmartDashboard.putData("button6",new raiseDumper( m_dumperSystem ) );
+        SmartDashboard.putData("button6",new lowerDumper( m_dumperSystem ) );
 
         final JoystickButton button5 = new JoystickButton(robotController, 5);        
         button5.whenHeld(new startIntake( m_intakeSystem ) ,true);
-        SmartDashboard.putData("button7",new startIntake( m_intakeSystem ) );
-
-        final JoystickButton button2 = new JoystickButton(robotController, 2);        
-        button2.whenHeld(new lowerIntake( m_intakeSystem ) ,true);
-        SmartDashboard.putData("button6",new lowerIntake( m_intakeSystem ) );
+        SmartDashboard.putData("button5",new startIntake( m_intakeSystem ) );
 
         final JoystickButton button1 = new JoystickButton(robotController, 1);        
         button1.whenPressed(new InstantCommand( m_intakeSystem::changeIntakeDirection, m_intakeSystem ) ,true);

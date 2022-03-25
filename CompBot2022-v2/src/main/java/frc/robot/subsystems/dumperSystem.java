@@ -53,7 +53,7 @@ public class dumperSystem extends SubsystemBase {
 }
 
     public void raiseDumper() {
-        dumperMotor.set(0.2);
+        dumperMotor.set(0.3);
     }
 
     public void lowerDumper() {
