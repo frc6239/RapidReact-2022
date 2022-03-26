@@ -77,7 +77,7 @@ public class lowerIntake extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return intakeLowerTime.hasElapsed(2.0);
+        return intakeLowerTime.hasElapsed(4.0);
     }
 
     @Override
