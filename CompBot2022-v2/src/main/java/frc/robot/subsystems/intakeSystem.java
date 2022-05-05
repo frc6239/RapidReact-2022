@@ -48,15 +48,15 @@ public class intakeSystem extends SubsystemBase {
     }
 
     public void runIntakeWheels() {
-        if (RobotContainer.getInstance().m_dumperSystem.isDumperLowered()) {
-            intakeWheelMotor.set(0.25);
-        } else {
-            intakeWheelMotor.set(0.0);
-        }
+        //if (RobotContainer.getInstance().m_dumperSystem.isDumperLowered()) {
+            intakeWheelMotor.set(0.35);
+        //} else {
+            //intakeWheelMotor.set(0.0);
+        //}
     }
 
     public void stopIntakeWheels() {
-        intakeWheelMotor.set(0);
+        intakeWheelMotor.set(0.0);
     }
 
     public void lowerIntake() {
