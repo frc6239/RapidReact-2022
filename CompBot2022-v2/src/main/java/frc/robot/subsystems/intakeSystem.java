@@ -18,8 +18,7 @@ package frc.robot.subsystems;
 //import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 //import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotContainer;
-
+import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -49,7 +48,7 @@ public class intakeSystem extends SubsystemBase {
 
     public void runIntakeWheels() {
         //if (RobotContainer.getInstance().m_dumperSystem.isDumperLowered()) {
-            intakeWheelMotor.set(0.35);
+            intakeWheelMotor.set(Constants.motorConstants.maxIntakeWheelSpeed);
         //} else {
             //intakeWheelMotor.set(0.0);
         //}
@@ -61,7 +60,7 @@ public class intakeSystem extends SubsystemBase {
 
     public void lowerIntake() {
         if (isIntakeLowered == false) {
-            lowerIntakeMotor.set(0.15);
+            lowerIntakeMotor.set(Constants.motorConstants.maxIntakeLowerSpeed);
         }
     }
 

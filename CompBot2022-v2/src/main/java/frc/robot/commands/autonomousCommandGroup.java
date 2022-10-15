@@ -13,6 +13,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
 import frc.robot.subsystems.driveSystem;
 import frc.robot.subsystems.dumperSystem;
 import frc.robot.subsystems.intakeSystem;
@@ -25,7 +26,7 @@ public class autonomousCommandGroup extends SequentialCommandGroup {
             new InstantCommand(m_intakeSystem::resetIntakeState, m_intakeSystem),
             new lowerIntake(m_intakeSystem),
             new moveDumper(m_dumperSystem),
-            new leaveTarmac(m_driveSystem, 84)
+            new leaveTarmac(m_driveSystem, Constants.driveConstants.leaveTarmacInches)
         );
 
     }

@@ -12,6 +12,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 //import frc.robot.commands.*;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import frc.robot.RobotContainer;
@@ -70,7 +71,7 @@ public class driveSystem extends SubsystemBase {
         addChild("Differential Drive 1",differentialDrive1);
         differentialDrive1.setSafetyEnabled(true);
         differentialDrive1.setExpiration(0.1);
-        differentialDrive1.setMaxOutput(0.3);
+        differentialDrive1.setMaxOutput(Constants.motorConstants.maxDriveSpeed);
     }
 
     @Override

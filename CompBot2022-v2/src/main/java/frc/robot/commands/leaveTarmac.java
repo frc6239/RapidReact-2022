@@ -13,6 +13,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.driveSystem;
 
 public class leaveTarmac extends CommandBase {
@@ -30,7 +31,7 @@ public class leaveTarmac extends CommandBase {
     @Override
     public void initialize() {
         initalPosition = m_driveSystem.getSensor();
-        finalPosition = initalPosition-2048*10.7*m_distanceInches/(6*Math.PI);
+        finalPosition = initalPosition-2048*Constants.driveConstants.gearboxRatio*m_distanceInches/(6*Math.PI);
     }
 
     @Override

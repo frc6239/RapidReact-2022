@@ -20,5 +20,24 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public class Constants {
+
+    public static final class motorConstants {
+        
+        public static final double maxDriveSpeed = 0.3;
+        public static final double maxIntakeWheelSpeed = 0.35;
+        public static final double maxIntakeLowerSpeed = 0.15;
+    }
+
+    public static final class driveConstants {
+
+        public static final double gearboxRatio = 10.7;
+        public static final double leaveTarmacInches = 84.0;
+    }
+
+    public static final class dumperConstants {
+
+        public static final double raiseDumperSpeed = 0.3;
+        public static final double lowerDumperSpeed = -0.1;
+    }
 }
 

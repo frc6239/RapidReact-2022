@@ -15,6 +15,8 @@ package frc.robot.subsystems;
 //import frc.robot.commands.*;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
@@ -53,11 +55,11 @@ public class dumperSystem extends SubsystemBase {
 }
 
     public void raiseDumper() {
-        dumperMotor.set(0.3);
+        dumperMotor.set(Constants.dumperConstants.raiseDumperSpeed);
     }
 
     public void lowerDumper() {
-        dumperMotor.set(-0.1);
+        dumperMotor.set(Constants.dumperConstants.lowerDumperSpeed);
     }
 
     public void stopDumperMotor() {
