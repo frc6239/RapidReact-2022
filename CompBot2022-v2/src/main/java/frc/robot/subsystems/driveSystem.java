@@ -70,7 +70,7 @@ public class driveSystem extends SubsystemBase {
         addChild("Differential Drive 1",differentialDrive1);
         differentialDrive1.setSafetyEnabled(true);
         differentialDrive1.setExpiration(0.1);
-        differentialDrive1.setMaxOutput(0.5);
+        differentialDrive1.setMaxOutput(0.3);
     }
 
     @Override
