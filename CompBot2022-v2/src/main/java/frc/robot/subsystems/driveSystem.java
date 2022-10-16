@@ -26,6 +26,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class driveSystem extends SubsystemBase {
     private WPI_TalonFX leftFrontMotor;
@@ -66,6 +67,13 @@ public class driveSystem extends SubsystemBase {
 
         rightBackMotor.setInverted(InvertType.FollowMaster);
         leftBackMotor.setInverted(InvertType.FollowMaster);
+
+        // Set motors so they coast when no power is applied
+        rightFrontMotor.setNeutralMode(NeutralMode.Coast);
+        rightBackMotor.setNeutralMode(NeutralMode.Coast);
+        leftFrontMotor.setNeutralMode(NeutralMode.Coast);
+        leftBackMotor.setNeutralMode(NeutralMode.Coast);
+        
 
         differentialDrive1 = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
         addChild("Differential Drive 1",differentialDrive1);
