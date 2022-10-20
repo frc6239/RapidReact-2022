@@ -16,6 +16,7 @@ package frc.robot;
 //import edu.wpi.first.hal.FRCNetComm.tResourceType;
 //import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -28,6 +29,9 @@ import edu.wpi.first.cameraserver.CameraServer;
  * the project.
  */
 public class Robot extends TimedRobot {
+    private XboxController robotController;
+    private double leftStickY;
+    private double rightStickX;
 
     private Command m_autonomousCommand;
 
@@ -110,6 +114,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+        robotController = RobotContainer.getInstance().getrobotController();
+        leftStickY = robotController.getLeftY();
+        rightStickX = robotController.getRightX();
+
+        RobotContainer.getInstance().m_driveSystem.arcadeDrive(leftStickY, -rightStickX);
     }
 
     @Override

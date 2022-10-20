@@ -36,7 +36,7 @@ public class leaveTarmac extends CommandBase {
 
     @Override
     public void execute() {
-        m_driveSystem.arcadeDrive(-0.5, 0);
+        m_driveSystem.arcadeDrive(-1, 0);
     }
 
     @Override

@@ -15,7 +15,6 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 //import frc.robot.commands.*;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -23,10 +22,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class driveSystem extends SubsystemBase {
     private WPI_TalonFX leftFrontMotor;
@@ -34,9 +30,6 @@ public class driveSystem extends SubsystemBase {
     private WPI_TalonFX rightFrontMotor;
     private WPI_TalonFX rightBackMotor;
     private DifferentialDrive differentialDrive1;
-    private XboxController robotController;
-    private double leftStickY;
-    private double rightStickX;
 
     public driveSystem() {
         leftFrontMotor = new WPI_TalonFX(1, "rio");
@@ -68,13 +61,6 @@ public class driveSystem extends SubsystemBase {
         rightBackMotor.setInverted(InvertType.FollowMaster);
         leftBackMotor.setInverted(InvertType.FollowMaster);
 
-        // Set motors so they coast when no power is applied
-        rightFrontMotor.setNeutralMode(NeutralMode.Coast);
-        rightBackMotor.setNeutralMode(NeutralMode.Coast);
-        leftFrontMotor.setNeutralMode(NeutralMode.Coast);
-        leftBackMotor.setNeutralMode(NeutralMode.Coast);
-        
-
         differentialDrive1 = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
         addChild("Differential Drive 1",differentialDrive1);
         differentialDrive1.setSafetyEnabled(true);
@@ -84,14 +70,6 @@ public class driveSystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        robotController = RobotContainer.getInstance().getrobotController();
-        leftStickY = robotController.getLeftY();
-        rightStickX = robotController.getRightX();
-
-        SmartDashboard.putNumber("Left Joystick Y Value", leftStickY);
-        SmartDashboard.putNumber("Right Joystick X Value", rightStickX);
-
-        differentialDrive1.arcadeDrive(leftStickY, -rightStickX);
     }
 
     @Override
