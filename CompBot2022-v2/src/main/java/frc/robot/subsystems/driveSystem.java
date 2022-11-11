@@ -30,18 +30,19 @@ public class driveSystem extends SubsystemBase {
     private WPI_TalonFX rightFrontMotor;
     private WPI_TalonFX rightBackMotor;
     private DifferentialDrive differentialDrive1;
+    private double maxDriveSpeed;
 
     public driveSystem() {
         leftFrontMotor = new WPI_TalonFX(1, "rio");
         leftBackMotor = new WPI_TalonFX(2, "rio");
         rightFrontMotor = new WPI_TalonFX(3, "rio");
         rightBackMotor = new WPI_TalonFX(4, "rio");
+        maxDriveSpeed = Constants.motorConstants.maxDriveSpeed;
 
         TalonFXConfiguration configs = new TalonFXConfiguration();
         configs.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
         leftFrontMotor.configAllSettings(configs);
 
-        leftFrontMotor.configFactoryDefault();
         leftFrontMotor.configFactoryDefault();
         leftBackMotor.configFactoryDefault();
         rightFrontMotor.configFactoryDefault();
@@ -65,7 +66,7 @@ public class driveSystem extends SubsystemBase {
         addChild("Differential Drive 1",differentialDrive1);
         differentialDrive1.setSafetyEnabled(true);
         differentialDrive1.setExpiration(0.1);
-        differentialDrive1.setMaxOutput(Constants.motorConstants.maxDriveSpeed);
+        differentialDrive1.setMaxOutput(maxDriveSpeed);
     }
 
     @Override
@@ -78,6 +79,20 @@ public class driveSystem extends SubsystemBase {
 
     public double getSensor() {
         return leftFrontMotor.getSelectedSensorPosition();
+    }
+
+    public void raiseMaxOutput() {
+        if (maxDriveSpeed < 1.0) {
+            maxDriveSpeed += 0.05;
+            differentialDrive1.setMaxOutput(maxDriveSpeed);
+        }
+    }
+
+    public void lowerMaxOutput() {
+        if (maxDriveSpeed > 0.1) {
+            maxDriveSpeed -= 0.05;
+            differentialDrive1.setMaxOutput(maxDriveSpeed);
+        }
     }
 
     public void arcadeDrive(double y, double x) {

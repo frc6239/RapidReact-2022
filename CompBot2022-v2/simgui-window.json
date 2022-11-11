@@ -1,25 +1,30 @@
 {
   "MainWindow": {
     "GLOBAL": {
-      "height": "1050",
+      "height": "1048",
       "maximized": "0",
       "style": "0",
       "userScale": "2",
       "width": "1920",
-      "xpos": "-1",
-      "ypos": "-1"
+      "xpos": "11",
+      "ypos": "47"
     }
   },
   "Window": {
+    "###/LiveWindow/driveSystem/Differential Drive 1": {
+      "Collapsed": "0",
+      "Pos": "644,30",
+      "Size": "300,350"
+    },
     "###FMS": {
       "Collapsed": "0",
-      "Pos": "7,810",
+      "Pos": "189,59",
       "Size": "388,182"
     },
     "###Joysticks": {
       "Collapsed": "0",
-      "Pos": "375,697",
-      "Size": "1156,91"
+      "Pos": "363,683",
+      "Size": "1156,316"
     },
     "###NetworkTables": {
       "Collapsed": "0",
@@ -33,13 +38,13 @@
     },
     "###System Joysticks": {
       "Collapsed": "0",
-      "Pos": "7,525",
+      "Pos": "71,509",
       "Size": "273,290"
     },
     "###Timing": {
       "Collapsed": "0",
       "Pos": "7,225",
-      "Size": "188,157"
+      "Size": "188,186"
     },
     "Debug##Default": {
       "Collapsed": "0",
